@@ -28,7 +28,7 @@ import java.util.Map;
 public class Login extends AppCompatActivity {
     private EditText email, password;
     private Button login, register;
-    private String url_login = "http://192.168.1.5/canteen/login.php";
+    private String url_login = "http://nbisdb.000webhostapp.com/login.php";
     private ProgressBar loading;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +49,7 @@ public class Login extends AppCompatActivity {
                 if(!temail.isEmpty() || !tpassword.isEmpty()){
                     Login(temail, tpassword);
                 }else{
-                    email.setError("Email required!");
+                    email.setError("Username required!");
                     password.setError("Password Required");
                 }
 
@@ -86,8 +86,14 @@ public class Login extends AppCompatActivity {
 
                         }
                         Toast.makeText(Login.this, "Login Success!", Toast.LENGTH_LONG).show();
+                        loading.setVisibility(View.GONE);
+                        login.setVisibility(View.VISIBLE);
                         Intent i = new Intent(Login.this, home.class);
                         startActivity(i);
+                    }else if(success.equals("0")){
+                        Toast.makeText(Login.this, "Login Error!", Toast.LENGTH_LONG).show();
+                        loading.setVisibility(View.GONE);
+                        login.setVisibility(View.VISIBLE);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -100,13 +106,15 @@ public class Login extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                Toast.makeText(Login.this, "Login Error!:" + error.toString(), Toast.LENGTH_LONG).show();
+                loading.setVisibility(View.GONE);
+                login.setVisibility(View.VISIBLE);
             }
         }){
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("email",email);
+                params.put("username",email);
                 params.put("password", password);
                 return params;
             }

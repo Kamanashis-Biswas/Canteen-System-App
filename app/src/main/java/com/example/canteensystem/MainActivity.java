@@ -26,10 +26,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
-    private EditText name, email, password;
+    private EditText name, email, password, phone, username;
     private Button register, login;
     private ProgressBar loading;
-    private static String url_register = "http://192.168.1.5/canteen/register.php";
+    private static String url_register = "http://nbisdb.000webhostapp.com/register.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         loading = (ProgressBar) findViewById(R.id.loading);
         name = (EditText)findViewById(R.id.name);
+        phone = (EditText)findViewById(R.id.phone);
+        username = (EditText)findViewById(R.id.username);
         email = (EditText)findViewById(R.id.email);
         password =(EditText) findViewById(R.id.password);
         register = (Button) findViewById(R.id.register);
@@ -67,6 +69,8 @@ public class MainActivity extends AppCompatActivity {
         final String name = this.name.getText().toString();
         final String email = this.email.getText().toString();
         final String password = this.password.getText().toString();
+        final String phone = this.phone.getText().toString();
+        final String userame = this.username.getText().toString();
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url_register,
                 new Response.Listener<String>() {
@@ -80,6 +84,10 @@ public class MainActivity extends AppCompatActivity {
                                 loading.setVisibility(View.GONE);
                                 register.setVisibility(View.VISIBLE);
                                 Toast.makeText(MainActivity.this, "Register Successfully!", Toast.LENGTH_LONG).show();
+                            } else if (success.equals("0")) {
+                                loading.setVisibility(View.GONE);
+                                register.setVisibility(View.VISIBLE);
+                                Toast.makeText(MainActivity.this, "Register Unsuccessful!", Toast.LENGTH_LONG).show();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -91,9 +99,10 @@ public class MainActivity extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(MainActivity.this, "Register Error!" + error.toString(), Toast.LENGTH_LONG).show();
                 loading.setVisibility(View.GONE);
                 register.setVisibility(View.VISIBLE);
+                Toast.makeText(MainActivity.this, "Register Error!" + error.toString(), Toast.LENGTH_LONG).show();
+
             }
         }){
             @Override
@@ -102,6 +111,8 @@ public class MainActivity extends AppCompatActivity {
                 params.put("name", name);
                 params.put("email", email);
                 params.put("password", password);
+                params.put("phone", phone);
+                params.put("username", userame);
 
                 return params;
             }

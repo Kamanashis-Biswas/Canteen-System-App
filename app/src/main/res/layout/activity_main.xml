@@ -53,7 +53,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/mobile"
+            android:id="@+id/phone"
             android:hint="Enter Phone No"
             android:inputType="number"/>
 
