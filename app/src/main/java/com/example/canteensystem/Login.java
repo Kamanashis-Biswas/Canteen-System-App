@@ -88,7 +88,7 @@ public class Login extends AppCompatActivity {
                         Toast.makeText(Login.this, "Login Success!", Toast.LENGTH_LONG).show();
                         loading.setVisibility(View.GONE);
                         login.setVisibility(View.VISIBLE);
-                        Intent i = new Intent(Login.this, home.class);
+                        Intent i = new Intent(Login.this,home.class );
                         startActivity(i);
                     }else if(success.equals("0")){
                         Toast.makeText(Login.this, "Login Error!", Toast.LENGTH_LONG).show();

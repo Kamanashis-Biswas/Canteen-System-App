@@ -44,20 +44,41 @@ public class MainActivity extends AppCompatActivity {
         register = (Button) findViewById(R.id.register);
         login = (Button) findViewById(R.id.login);
 
+
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Register();
-            }
-        });
+                String namet = name.getText().toString().trim();
+                String emailt = email.getText().toString().trim();
+                String usernamet = username.getText().toString().trim();
+                String phonet = phone.getText().toString().trim();
+                String passwordt = password.getText().toString().trim();
+
+                    if(namet.isEmpty()){
+                        name.setError("Enter the NameField!");
+                    }else if(emailt.isEmpty()){
+                        email.setError("Enter the EmailField!");
+
+                    }else if(usernamet.isEmpty()){
+                        username.setError("Enter the UsernameField!");
+
+                    }else if(phonet.isEmpty()){
+                        phone.setError("Enter the PhoneNumberField!");
+
+                    }else if(passwordt.isEmpty()){
+                        password.setError("Enter the PasswordField!");
+
+                    }
+                    else {
+
+                        Register();
+                        Intent i = new Intent(MainActivity.this, Login.class);
+                        startActivity(i);
+                    }
+
+                }
 
 
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, Login.class);
-                startActivity(i);
-            }
         });
 
     }
