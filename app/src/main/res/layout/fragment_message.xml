@@ -16,6 +16,13 @@
         android:paddingLeft="10dp"
         android:paddingTop="20dp">
 
+        <ImageView
+            android:id="@+id/img1"
+            android:layout_width="128dp"
+            android:layout_height="128dp"
+            android:layout_gravity="center"
+            android:paddingBottom="10dp" />
+
     </LinearLayout>
 
 
