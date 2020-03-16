@@ -11,45 +11,45 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class EAdapter extends RecyclerView.Adapter<EAdapter.ExampleViewHolder>{
-    private  ArrayList<Item> mexamplelist;
+public class EAdapter extends RecyclerView.Adapter<EAdapter.ExampleViewHolder> {
+    private ArrayList<LItem> eitem = new ArrayList<>();
 
-    public static class ExampleViewHolder extends RecyclerView.ViewHolder{
+    public static  class ExampleViewHolder extends RecyclerView.ViewHolder{
 
-        public ImageView image;
+        public ImageView mimageview;
         public TextView mtv1;
         public TextView mtv2;
         public ExampleViewHolder(@NonNull View itemView) {
             super(itemView);
-            image = itemView.findViewById(R.id.image);
+            mimageview = itemView.findViewById(R.id.imageview);
             mtv1 = itemView.findViewById(R.id.tv1);
             mtv2 = itemView.findViewById(R.id.tv2);
-
         }
     }
 
-    public EAdapter(ArrayList<Item> elist){
-        mexamplelist = elist;
 
+    public EAdapter(ArrayList<LItem> litem){
+        eitem = litem;
     }
+
     @NonNull
     @Override
     public ExampleViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item, parent, false);
-        ExampleViewHolder evh  = new ExampleViewHolder(view);
-        return  evh;
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.litem, parent, false);
+        ExampleViewHolder evh = new ExampleViewHolder(v);
+        return evh;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ExampleViewHolder holder, int position) {
-        Item currentitem = mexamplelist.get(position);
-        holder.image.setImageResource(currentitem.getmImage());
-        holder.mtv1.setText(currentitem.getText1());;
-        holder.mtv2.setText(currentitem.getText2());
+        LItem citem = eitem.get(position);
+        holder.mimageview.setImageResource(citem.getMimageresouce());
+        holder.mtv1.setText(citem.getMtext1());
+        holder.mtv2.setText(citem.getMtext2());
     }
 
     @Override
     public int getItemCount() {
-        return mexamplelist.size();
+        return eitem.size();
     }
 }

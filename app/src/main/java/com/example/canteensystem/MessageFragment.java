@@ -11,10 +11,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class MessageFragment extends Fragment {
-    private RecyclerView mrecylerview;
+
     private RecyclerView.Adapter madapter;
     private RecyclerView.LayoutManager mlayoutmanager;
 
@@ -22,22 +23,23 @@ public class MessageFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-//        ArrayList<Item> item = new ArrayList<>();
-//        item.add(new Item(R.drawable.ic_add_box_black_24dp, "Line1", "Line2"));
-//        item.add(new Item(R.drawable.ic_add_box_black_24dp, "Line1", "Line2"));
-//        item.add(new Item(R.drawable.ic_add_box_black_24dp, "Line1", "Line2"));
-//
-//        mrecylerview = container.findViewById(R.id.recylerview);
-//        mrecylerview.setHasFixedSize(true);
-//        mlayoutmanager = new LinearLayoutManager(container.getContext());
-//        madapter = new EAdapter(item);
-//        mrecylerview.setLayoutManager(mlayoutmanager);
-//        mrecylerview.setAdapter(madapter);
-//
-////    return inflater.inflate(R.layout.fragment_message, mrecylerview, false);
-        return inflater.inflate(R.layout.fragment_message, container,false);
+       View view = (View)inflater.inflate(R.layout.fragment_message, container, false);
 
+       ArrayList<LItem> item = new ArrayList<>();
+       item.add(new LItem(R.drawable.ic_android, "Line 1", "LIne 2"));
+       item.add(new LItem(R.drawable.ic_android, "Line 1", "LIne 2"));
+       item.add(new LItem(R.drawable.ic_android, "Line 1", "LIne 2"));
+       item.add(new LItem(R.drawable.ic_android, "Line 1", "LIne 2"));
+
+        RecyclerView recyclerView = view.findViewById(R.id.recylerview);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        madapter = new EAdapter(item);
+        recyclerView.setAdapter(madapter);
+        return view;
 
 
     }
+
+
 }
